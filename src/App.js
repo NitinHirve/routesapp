@@ -10,6 +10,7 @@ import Header from './components/Header';
 import Contact from './Pages/Contact';
 import Help from './Pages/Help';
 
+
 const StyledBox = styled(Box)({
   display: "flex",
   flexDirection: "column",
@@ -21,39 +22,43 @@ const StyledBox = styled(Box)({
 const App = () => {
 
   const [user, setUser] = useState(false)
+  const [userDetails, setUserDetails] = useState('');
 
   useEffect(() => {
     const userStatus = localStorage.getItem("user");
-    console.log('userStatus : ',userStatus);
+    const userDetailsLocalStorage = localStorage.getItem("userDetails");
+
+    console.log('userStatus : ', userStatus);
     userStatus && JSON.parse(userStatus) ? (setUser(true)) : (setUser(false));
+    userDetailsLocalStorage && JSON.parse(userDetailsLocalStorage) ? (setUserDetails(JSON.parse(userDetailsLocalStorage))) : (setUserDetails(''));
+
   }, [])
 
 
   useEffect(() => {
     localStorage.setItem("user", user)
-  }, [user])
-  
+    localStorage.setItem("userDetails", JSON.stringify(userDetails))
+  }, [user, userDetails])
 
 
   return (
     <>
-        <StyledBox>
-        {user &&       <Header logout={() => setUser(false)}/>
-}
-      <Routes>
-        {!user &&
-          <Route path="/auth" element={<Auth authenticate={() => setUser(true)} />} />
-        }
-        {user &&
-          <>
-            <Route path="/profile" element={<Profile logout={() => setUser(false)} />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/help" element={<Help />} />
-          </>
-        }
-        <Route path="*" element={<Navigate to={user? "/profile" : "/auth"} />} />
-      </Routes>
+      <StyledBox>
+        {user && <Header setUserDetails={setUserDetails} logout={() => setUser(false)} />}
+        <Routes>
+          {!user &&
+            <Route path="/auth" element={<Auth setUserDetails={setUserDetails} authenticate={() => setUser(true)} />} />
+          }
+          {user &&
+            <>
+              <Route path="/profile" element={<Profile userDetails={userDetails} logout={() => setUser(false)} />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/help" element={<Help />} />
+            </>
+          }
+          <Route path="*" element={<Navigate to={user ? "/profile" : "/auth"} />} />
+        </Routes>
       </StyledBox>
 
     </>
