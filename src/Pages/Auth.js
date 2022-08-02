@@ -4,9 +4,20 @@ import { Formik, Form, Field, ErrorMessage, FieldArray, FastField } from 'formik
 import { Box, Button, FormControl, FormControlLabel, FormLabel, IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText, Radio, RadioGroup, Slide, Stack, styled, Switch, TextField, Typography } from '@mui/material';
 import * as Yup from 'yup';
 import jwt_decode from 'jwt-decode';
-
-
+import { USER_EMAIL, USER_PASSWORD } from '../Credentials';
 const google = window.google;
+
+
+
+const StyledLoginBox = styled(Box)({
+  marginBottom: "13px",
+  display: 'flex',
+  justifyContent: 'center'
+})
+
+const StyledFieldBox = styled(Box)({
+  marginBottom: "13px"
+})
 
 
 const initialValues = {
@@ -56,7 +67,7 @@ const Auth = ({ setUserDetails, authenticate }) => {
 
   const onSubmit = (values) => {
     console.log('User credentials : ', values);
-    if (values.email === 'hirvenitin@gmail.com' && values.password === '12345') {
+    if (values.email === USER_EMAIL && values.password === USER_PASSWORD) {
       authenticate();
       navigate("profile");
     }
@@ -70,25 +81,40 @@ const Auth = ({ setUserDetails, authenticate }) => {
 
       <h2 style={{ margin: "60px 0 60px 0" }}>Login </h2>
       <Formik
+
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmit}
       >
         <Form>
-          <Box sx={{ marginBottom: "13px" }}>
-            <Field type="text" label="Email address" variant="outlined" id="email-address" name="email"
-              placeholder="Your email" as={TextField} />
-          </Box>
-          <Box sx={{ marginBottom: "13px" }}>
-            <Field type="password" label="Password" variant="outlined" id="password" name="password"
+          <StyledFieldBox >
+            <Field
+              type="text"
+              label="Email address"
+              variant="outlined"
+              id="email-address"
+              name="email"
+              placeholder="Your email"
+              as={TextField} />
+          </StyledFieldBox>
+          <StyledFieldBox >
+            <Field
+              type="password"
+              label="Password"
+              variant="outlined"
+              id="password"
+              name="password"
               placeholder="Your password" as={TextField} />
-          </Box>
-          <Box sx={{ marginBottom: "13px", display: 'flex', justifyContent: 'center' }}>
-            <Button sx={{ textTransform: 'none' }} type="submit" variant="contained" >Login</Button>
-          </Box>
-          <Box id="signInDiv">
-
-          </Box>
+          </StyledFieldBox>
+          <StyledLoginBox >
+            <Button
+              sx={{ textTransform: 'none' }}
+              type="submit"
+              variant="contained" >
+              Login
+            </Button>
+          </StyledLoginBox>
+          <Box id="signInDiv"></Box>
         </Form>
       </Formik>
     </>

@@ -44,20 +44,50 @@ const App = () => {
   return (
     <>
       <StyledBox>
-        {user && <Header setUserDetails={setUserDetails} logout={() => setUser(false)} />}
+        {
+          user && <Header
+            setUserDetails={setUserDetails}
+            logout={() => setUser(false)}
+          />
+        }
         <Routes>
           {!user &&
-            <Route path="/auth" element={<Auth setUserDetails={setUserDetails} authenticate={() => setUser(true)} />} />
+            <Route
+              path="/auth"
+              element={
+                <Auth
+                  setUserDetails={setUserDetails}
+                  authenticate={() => setUser(true)}
+                />
+              }
+            />
           }
           {user &&
             <>
-              <Route path="/profile" element={<Profile userDetails={userDetails} logout={() => setUser(false)} />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/help" element={<Help />} />
+              <Route
+                path="/profile"
+                element={<Profile
+                  userDetails={userDetails}
+                  logout={() => setUser(false)}
+                />}
+              />
+              <Route
+                path="/dashboard"
+                element={<Dashboard />} />
+              <Route
+                path="/contact"
+                element={<Contact />} />
+              <Route
+                path="/help"
+                element={<Help />} />
             </>
           }
-          <Route path="*" element={<Navigate to={user ? "/profile" : "/auth"} />} />
+          <Route
+            path="*"
+            element={<Navigate
+              to={user ? "/profile" : "/auth"}
+            />}
+          />
         </Routes>
       </StyledBox>
 
