@@ -16,6 +16,7 @@ const Employees = () => {
     const [users, setUsers] = useState([userTemplate]);
     const [showTable, setShowTable] = useState(false);
     const [savedEmployees, setSavedEmployees] = useState([]);
+    const [errors, setErrors] = useState([]);
 
     const addEmployee = () => {
         setUsers([...users, userTemplate])
@@ -38,33 +39,77 @@ const Employees = () => {
 
     const saveEmployees = () => {
 
-      
+        let flag = false;
+        setErrors([])
+        setErrors([])
+        setErrors([])
+        setErrors([])
 
+        users.map((emp, i) => {
+            if (emp.name === '') {
+                setErrors(...errors, errors.push([true]))
+                flag = true;
+            }
+            else {
+                setErrors(...errors, errors.push([false]))
+            }
 
-        setSavedEmployees([...savedEmployees,...users])
-        //  debugger;
-         console.log("Hii")
-         setUsers([])
-         alert("Employees successfully saved")
+            if (emp.email === '') {
+                setErrors(...errors, errors[i].push(true))
+                flag = true;
+            }
+            else {
+                setErrors(...errors, errors[i].push(false))
+            }
+            if (emp.phone === '') {
+                setErrors(...errors, errors[i].push(true))
+                flag = true;
+            }
+            else {
+                setErrors(...errors, errors[i].push(false))
+            }
+            if (emp.address === '') {
+                setErrors(...errors, errors[i].push(true))
+                flag = true;
+            }
+            else {
+                setErrors(...errors, errors[i].push(false))
+            }
+        })
+
+        console.log("Errors : ", errors);
+        if (flag) {
+            alert("Please fill the details")
+        }
+
+        else {
+            setSavedEmployees([...savedEmployees, ...users])
+            //  debugger;
+            console.log("Hii")
+            setUsers([])
+            alert("Employees successfully saved")
+        }
 
     }
 
     return (
         <>
             <Container >
-                <Paper component={Box} p={4}>
+                <Paper sx={{marginTop:"20px"}} component={Box} p={4}>
                     {
+
+
                         users.map((user, index) => (
                             <>
-                                <Emp user={user} index={index} onChange={onChange} removeEmployee={removeEmployee} />
+                                <Emp user={user} errors={errors?(Array.isArray(errors)?errors[index]:errors)   :''} index={index} onChange={onChange} removeEmployee={removeEmployee} />
                             </>
                         ))
+
                     }
                     <Button onClick={() => { addEmployee() }} sx={{ textTransform: "none" }} variant="contained" >Add employee</Button>
-                    {users[0] && <Button onClick={() => {saveEmployees()}} sx={{ textTransform: "none", marginLeft: '15px' }} color='secondary' variant="contained" >Save employees</Button>}
+                    {users[0] && <Button onClick={() => { saveEmployees() }} sx={{ textTransform: "none", marginLeft: '15px' }} color='secondary' variant="contained" >Save employees</Button>}
                 </Paper>
                 <Button onClick={() => { setShowTable(!showTable) }} sx={{ textTransform: "none", marginTop: '15px' }} color='secondary' variant="outlined" >{showTable ? "Hide table" : "Show table"}</Button>
-                
 
                 {
                     showTable && <EmpTable employees={savedEmployees} />

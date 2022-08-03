@@ -8,7 +8,9 @@ import { Formik, Form, Field, ErrorMessage, FieldArray, FastField } from 'formik
 
 
 
-const Emp = ({ user, index, onChange, removeEmployee }) => {
+const Emp = ({ user, index,errors, onChange, removeEmployee }) => {
+
+    console.log('Emp errors : ',errors);
 
     const textFeildProps = [
 
@@ -19,11 +21,12 @@ const Emp = ({ user, index, onChange, removeEmployee }) => {
     ]
     return (
         <>
-               
+
 
             <Grid sx={{ marginBottom: "20px" }} spacing={3} container key={index} >
                 {
                     textFeildProps.map((field, i) =>
+
                         <EmpTextField key={i}
                             cols={field.cols}
                             label={field.label}
@@ -31,6 +34,9 @@ const Emp = ({ user, index, onChange, removeEmployee }) => {
                             onChange={onChange}
                             index={index}
                             user={user}
+                            errors ={
+                                errors?(Array.isArray(errors)?errors[i]:errors)   :''
+                                }
                         />)
                 }
                 {/* <Grid item md={1}>
@@ -43,7 +49,7 @@ const Emp = ({ user, index, onChange, removeEmployee }) => {
                         <DeleteOutline onClick={() => { removeEmployee(index) }} />
                     </IconButton>
                 </Grid>
-                
+
             </Grid>
         </>
     )

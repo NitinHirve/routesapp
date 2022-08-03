@@ -9,11 +9,10 @@ import Paper from '@mui/material/Paper';
 
 
 
-
 const EmpTable = ({ employees }) => {
     return (
         <>
-            <TableContainer component={Paper}>
+            <TableContainer sx={{marginTop:"20px"}} component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
 
                     <TableHead>
