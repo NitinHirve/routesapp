@@ -2,9 +2,7 @@ import { AppBar, styled, Avatar, Box, Button, Container, IconButton, Menu, Toolb
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-require('./Header.css');
-
-const pages = ['Profile', 'Dashboard', 'Contact', 'Help'];
+const pages = ['Profile', 'Dashboard','Employees', 'Contact', 'Help'];
 
 const StyledTypography = styled(Typography)({
   mr: 2,
