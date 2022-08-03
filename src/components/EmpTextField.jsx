@@ -6,6 +6,7 @@ const EmpTextField = ({ cols, label, placeholder, name, onChange, index, user })
         <>
             <Grid item md={cols}>
                 <TextField
+                // error ={true}
                     label={label}
                     placeholder={placeholder}
                     variant="outlined"

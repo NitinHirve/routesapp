@@ -79,7 +79,7 @@ const Auth = ({ setUserDetails, authenticate }) => {
   return (
     <>
 
-      <h2 style={{ margin: "60px 0 60px 0" }}>Login </h2>
+      <Typography variant='h5' sx={{ margin: "60px 0 60px 0" }}>Login </Typography>
       <Formik
 
         initialValues={initialValues}

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { AppBar, Grid, Container, Paper, styled, TextField, Avatar, Box, Button, IconButton, Menu, Toolbar, Tooltip, Typography } from '@mui/material';
 import { DeleteOutline } from '@mui/icons-material';
 import Emp from '../components/Emp'
+import EmpTable from '../components/EmpTable'
 
 const Employees = () => {
 
@@ -13,6 +14,8 @@ const Employees = () => {
     }
 
     const [users, setUsers] = useState([userTemplate]);
+    const [showTable, setShowTable] = useState(false);
+    const [savedEmployees, setSavedEmployees] = useState([]);
 
     const addEmployee = () => {
         setUsers([...users, userTemplate])
@@ -33,6 +36,19 @@ const Employees = () => {
         setUsers(filteredEmployees);
     }
 
+    const saveEmployees = () => {
+
+      
+
+
+        setSavedEmployees([...savedEmployees,...users])
+        //  debugger;
+         console.log("Hii")
+         setUsers([])
+         alert("Employees successfully saved")
+
+    }
+
     return (
         <>
             <Container >
@@ -45,9 +61,16 @@ const Employees = () => {
                         ))
                     }
                     <Button onClick={() => { addEmployee() }} sx={{ textTransform: "none" }} variant="contained" >Add employee</Button>
-                    <Button sx={{ textTransform: "none",marginLeft:'15px' }} color='secondary' variant="contained" >Save employees</Button>
-
+                    {users[0] && <Button onClick={() => {saveEmployees()}} sx={{ textTransform: "none", marginLeft: '15px' }} color='secondary' variant="contained" >Save employees</Button>}
                 </Paper>
+                <Button onClick={() => { setShowTable(!showTable) }} sx={{ textTransform: "none", marginTop: '15px' }} color='secondary' variant="outlined" >{showTable ? "Hide table" : "Show table"}</Button>
+                
+
+                {
+                    showTable && <EmpTable employees={savedEmployees} />
+                }
+
+
             </Container>
         </>
     )

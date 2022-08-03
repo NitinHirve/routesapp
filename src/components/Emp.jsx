@@ -1,8 +1,10 @@
 
 import React from 'react'
 import { DeleteOutline } from '@mui/icons-material'
-import { Grid, IconButton, TextField } from '@mui/material'
+import { Button, Grid, IconButton, TextField } from '@mui/material'
 import EmpTextField from '../components/EmpTextField'
+import { Formik, Form, Field, ErrorMessage, FieldArray, FastField } from 'formik';
+
 
 
 
@@ -17,6 +19,8 @@ const Emp = ({ user, index, onChange, removeEmployee }) => {
     ]
     return (
         <>
+               
+
             <Grid sx={{ marginBottom: "20px" }} spacing={3} container key={index} >
                 {
                     textFeildProps.map((field, i) =>
@@ -29,11 +33,17 @@ const Emp = ({ user, index, onChange, removeEmployee }) => {
                             user={user}
                         />)
                 }
+                {/* <Grid item md={1}>
+                    <IconButton color="success">
+                        <Button size="small" color="success" sx={{ textTransform: "none" }} variant="contained" >Save</Button>
+                    </IconButton>
+                </Grid> */}
                 <Grid item md={1}>
                     <IconButton color="error">
                         <DeleteOutline onClick={() => { removeEmployee(index) }} />
                     </IconButton>
                 </Grid>
+                
             </Grid>
         </>
     )
