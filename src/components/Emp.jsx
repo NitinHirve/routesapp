@@ -19,12 +19,13 @@ const Emp = ({ user, index, onChange, removeEmployee }) => {
     ]
     return (
         <>
-               
+
 
             <Grid sx={{ marginBottom: "20px" }} spacing={3} container key={index} >
                 {
                     textFeildProps.map((field, i) =>
-                        <EmpTextField key={i}
+                        <EmpTextField
+                            key={i}
                             cols={field.cols}
                             label={field.label}
                             name={field.name}
@@ -43,7 +44,7 @@ const Emp = ({ user, index, onChange, removeEmployee }) => {
                         <DeleteOutline onClick={() => { removeEmployee(index) }} />
                     </IconButton>
                 </Grid>
-                
+
             </Grid>
         </>
     )
