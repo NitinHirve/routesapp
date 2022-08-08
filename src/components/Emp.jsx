@@ -8,9 +8,9 @@ import { Formik, Form, Field, ErrorMessage, FieldArray, FastField } from 'formik
 
 
 
-const Emp = ({ user, index,errors, onChange, removeEmployee }) => {
+const Emp = ({ user, index, errors, onChange, removeEmployee }) => {
 
-    console.log('Emp errors : ',errors);
+    console.log('Emp errors : ', errors);
 
     const textFeildProps = [
 
@@ -27,26 +27,25 @@ const Emp = ({ user, index,errors, onChange, removeEmployee }) => {
                 {
                     textFeildProps.map((field, i) =>
 
-                        <EmpTextField key={i}
+                        <EmpTextField
+                            key={i}
                             cols={field.cols}
                             label={field.label}
                             name={field.name}
                             onChange={onChange}
                             index={index}
                             user={user}
-                            errors ={
-                                errors?(Array.isArray(errors)?errors[i]:errors)   :''
-                                }
+                            errors={
+                                errors ? (Array.isArray(errors) ? errors[i] : errors) : ''
+                            }
                         />)
                 }
-                {/* <Grid item md={1}>
-                    <IconButton color="success">
-                        <Button size="small" color="success" sx={{ textTransform: "none" }} variant="contained" >Save</Button>
-                    </IconButton>
-                </Grid> */}
+
                 <Grid item md={1}>
                     <IconButton color="error">
-                        <DeleteOutline onClick={() => { removeEmployee(index) }} />
+                        <DeleteOutline
+                            onClick={() => { removeEmployee(index) }}
+                        />
                     </IconButton>
                 </Grid>
 

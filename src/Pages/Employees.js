@@ -29,6 +29,8 @@ const Employees = () => {
                 : user
         );
         setUsers(updatedEmployees);
+        
+
     }
 
     const removeEmployee = (index) => {
@@ -40,10 +42,6 @@ const Employees = () => {
     const saveEmployees = () => {
 
         let flag = false;
-        setErrors([])
-        setErrors([])
-        setErrors([])
-        setErrors([])
 
         users.map((emp, i) => {
             if (emp.name === '') {
@@ -77,9 +75,11 @@ const Employees = () => {
             }
         })
 
+        setErrors([])
+
         console.log("Errors : ", errors);
         if (flag) {
-            alert("Please fill the details")
+            alert("Please fill the all field details")
         }
 
         else {
@@ -95,26 +95,55 @@ const Employees = () => {
     return (
         <>
             <Container >
-                <Paper sx={{marginTop:"20px"}} component={Box} p={4}>
+                <Paper sx={{ marginTop: "20px" }} component={Box} p={4}>
                     {
-
-
                         users.map((user, index) => (
                             <>
-                                <Emp user={user} errors={errors?(Array.isArray(errors)?errors[index]:errors)   :''} index={index} onChange={onChange} removeEmployee={removeEmployee} />
+                                <Emp
+                                    user={user}
+                                    errors={
+                                        errors
+                                            ? (Array.isArray(errors) ? errors[index] : errors)
+                                            : ''
+                                    }
+                                    index={index}
+                                    onChange={onChange}
+                                    removeEmployee={removeEmployee}
+                                />
                             </>
                         ))
-
                     }
-                    <Button onClick={() => { addEmployee() }} sx={{ textTransform: "none" }} variant="contained" >Add employee</Button>
-                    {users[0] && <Button onClick={() => { saveEmployees() }} sx={{ textTransform: "none", marginLeft: '15px' }} color='secondary' variant="contained" >Save employees</Button>}
+                    <Button
+                        onClick={() => { addEmployee() }}
+                        sx={{ textTransform: "none" }}
+                        variant="contained"
+                    >
+                        Add employee
+                    </Button>
+
+                    {users[0] &&
+                        <Button
+                            onClick={() => { saveEmployees() }}
+                            sx={{ textTransform: "none", marginLeft: '15px' }}
+                            color='secondary'
+                            variant="contained"
+                        >
+                            Save employees
+                        </Button>
+                    }
                 </Paper>
-                <Button onClick={() => { setShowTable(!showTable) }} sx={{ textTransform: "none", marginTop: '15px' }} color='secondary' variant="outlined" >{showTable ? "Hide table" : "Show table"}</Button>
+                <Button
+                    onClick={() => { setShowTable(!showTable) }}
+                    sx={{ textTransform: "none", marginTop: '15px' }}
+                    color='secondary'
+                    variant="outlined"
+                >
+                    {showTable ? "Hide table" : "Show table"}
+                </Button>
 
                 {
                     showTable && <EmpTable employees={savedEmployees} />
                 }
-
 
             </Container>
         </>
