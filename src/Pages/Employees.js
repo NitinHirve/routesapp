@@ -3,6 +3,10 @@ import { AppBar, Grid, Container, Paper, styled, TextField, Avatar, Box, Button,
 import { DeleteOutline } from '@mui/icons-material';
 import Emp from '../components/Emp'
 import EmpTable from '../components/EmpTable'
+import DOMPurify from 'dompurify';
+var clean = DOMPurify.sanitize("<img src onerror=\"alert('hacked')\"  />");
+var clean2 = DOMPurify.sanitize("<script>Hello</script>Hii");
+console.log('Cleaned code : ',clean2);
 
 const Employees = () => {
 

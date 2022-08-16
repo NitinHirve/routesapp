@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage, FieldArray, FastField } from 'formik';
 import { Box, Button, FormControl, FormControlLabel, FormLabel, IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText, Radio, RadioGroup, Slide, Stack, styled, Switch, TextField, Typography } from '@mui/material';
@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import jwt_decode from 'jwt-decode';
 import { USER_EMAIL, USER_PASSWORD } from '../Credentials';
 const google = window.google;
+
 
 
 
@@ -31,6 +32,8 @@ const validationSchema = Yup.object({
 });
 
 const Auth = ({ setUserDetails, authenticate }) => {
+
+  const [disabledStatus, setDisabledStatus] = useState(false)
 
 
   function handleCallbackResponse(response) {
@@ -85,37 +88,56 @@ const Auth = ({ setUserDetails, authenticate }) => {
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmit}
+        validateOnBlur={true}
+        validateOnChange={true}
       >
-        <Form>
-          <StyledFieldBox >
-            <Field
-              type="text"
-              label="Email address"
-              variant="outlined"
-              id="email-address"
-              name="email"
-              placeholder="Your email"
-              as={TextField} />
-          </StyledFieldBox>
-          <StyledFieldBox >
-            <Field
-              type="password"
-              label="Password"
-              variant="outlined"
-              id="password"
-              name="password"
-              placeholder="Your password" as={TextField} />
-          </StyledFieldBox>
-          <StyledLoginBox >
-            <Button
-              sx={{ textTransform: 'none' }}
-              type="submit"
-              variant="contained" >
-              Login
-            </Button>
-          </StyledLoginBox>
-          <Box id="signInDiv"></Box>
-        </Form>
+        {
+          ({ handleChange, values, touched, errors, handleBlur }) => (
+            <Form>
+              <StyledFieldBox >
+                <Field
+                  type="text"
+                  label="Email address"
+                  variant="outlined"
+                  id="email-address"
+                  name="email"
+                  placeholder="Your email"
+                  value={values.email}
+                  onChange={handleChange}
+                  onFocus={handleBlur}
+                  isInvalid={touched.email && !!errors.email}
+                  isValid={!errors.email}
+                  as={TextField} />
+              </StyledFieldBox>
+              <StyledFieldBox >
+                <Field
+                  type="password"
+                  label="Password"
+                  variant="outlined"
+                  id="password"
+                  name="password"
+                  placeholder="Your password"
+                  value={values.password}
+                  onChange={handleChange}
+                  onFocus={handleBlur}
+                  isInvalid={touched.password && !!errors.password}
+                  isValid={!errors.password}
+                  as={TextField} />
+              </StyledFieldBox>
+              <StyledLoginBox >
+                <Button
+                  sx={{ textTransform: 'none' }}
+                  type="submit"
+                  variant="contained"
+                  disabled={Array.isArray(errors) || Object.values(errors).toString() != ""}
+                >
+                  Login
+                </Button>
+              </StyledLoginBox>
+              <Box id="signInDiv"></Box>
+            </Form>
+          )
+        }
       </Formik>
     </>
   )
