@@ -1,8 +1,8 @@
 import { AppBar, styled, Avatar, Box, Button, Container, IconButton, Menu, Toolbar, Tooltip, Typography } from '@mui/material';
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 
-const pages = ['Profile', 'Dashboard','Employees', 'Contact', 'Help'];
+const pages = ['Profile', 'Dashboard','Employees','Payments', 'Contact', 'Help'];
 
 const StyledTypography = styled(Typography)({
   mr: 2,
@@ -35,6 +35,12 @@ const StyledNavigationBox = styled(Box)({
 
 
 const Header = ({ setUserDetails, logout }) => {
+
+  const [color, changeColor] = useState('');
+  document.body.style.backgroundColor = color;
+
+
+
   return (
     <>
       <AppBar position="static">
@@ -57,7 +63,9 @@ const Header = ({ setUserDetails, logout }) => {
                 >
                   <Link
                     style={linkStyle}
-                    to={`/${page}`} >
+                    to={`/${page}`} 
+                    onClick ={page==='Payments'?() => changeColor("#f4f4f4"):() => changeColor("#fff")}
+                    >
                     {page}
                   </Link>
                 </StyledNavigateButton>

@@ -79,8 +79,6 @@ const Profile = ({ userDetails, logout }) => {
 // useCallback provide us memoized callback and do no rerender everytime component did mount.
   const optimizedVersion = useCallback(debounce(handleChange))
 
-
-
   return (
     <>
       {

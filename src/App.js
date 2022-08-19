@@ -10,6 +10,7 @@ import { Box, styled } from '@mui/material';
 import Header from './components/Header';
 import Contact from './Pages/Contact';
 import Help from './Pages/Help';
+import Payments from './Pages/Payments';
 
 
 const StyledBox = styled(Box)({
@@ -24,6 +25,8 @@ const App = () => {
 
   const [user, setUser] = useState(false)
   const [userDetails, setUserDetails] = useState('');
+ 
+
 
   useEffect(() => {
     const userStatus = localStorage.getItem("user");
@@ -84,7 +87,9 @@ const App = () => {
               <Route
                 path="/employees"
                 element={<Employees />} />
-
+              <Route
+                path="/payments"
+                element={<Payments />} />
             </>
           }
           <Route
@@ -99,7 +104,6 @@ const App = () => {
     </>
   );
 }
-
 
 
 
