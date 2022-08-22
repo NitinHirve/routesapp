@@ -1,4 +1,17 @@
-.css-ny8qih-MuiTimelineItem-root
+.css-ny8qih-MuiTimelineItem-root {
+    min-height: 10px !important;
+}
+
+.payments_subhead {
+    width: 85%;
+    font-family: Montserrat;
+    font-size: 14px;
+    color: #626262;
+}
+
+.css-15v22id-MuiAccordionDetails-root 
 {
-    min-height: 10px!important;
+
+padding:5px!important;
+
 }
