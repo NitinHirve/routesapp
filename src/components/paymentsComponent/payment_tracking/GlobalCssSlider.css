@@ -1,0 +1,41 @@
+.css-ny8qih-MuiTimelineItem-root {
+    min-height: 10px !important;
+}
+
+.payments_subhead {
+    width: 85%;
+    font-family: Montserrat;
+    font-size: 14px;
+    color: #626262;
+}
+
+.wallet_subhead{
+    font-family: Montserrat;
+    font-size: 14px;
+    color: #626262;
+}
+
+.css-15v22id-MuiAccordionDetails-root {
+    padding: 5px !important;
+}
+
+
+.css-aqbmh3-MuiPaper-root-MuiAccordion-root:before {
+    height: 0 !important;
+}
+
+.css-1b68kuv-MuiPaper-root-MuiAccordion-root:before {
+    height: 0 !important;
+}
+
+.css-234oks-MuiPaper-root-MuiAccordion-root:before
+{
+    height: 0 !important;
+}
+
+.yourWallets_footer{
+    font-size:13px;
+    cursor:pointer;
+    color: #626262;
+    margin:15px 5px 10px 0!important;
+}

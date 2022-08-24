@@ -79,10 +79,6 @@ const steps = [
 ];
 
 
-
-
-
-
 const Transactions = ({ user }) => {
 
     const [expanded, setExpanded] = useState(false);
@@ -124,8 +120,6 @@ const Transactions = ({ user }) => {
     const handleChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
     };
-
-
 
 
     return (
@@ -290,15 +284,14 @@ const Transactions = ({ user }) => {
 
                             </Timeline>
 
-                            {(user.status != 'rejected') && <Typography sx={{ fontSize: '13px', margin: '15px 0 15px 0', fontFamily: 'Montserrat', color: 'red' }} variant="h5">
+                            {(user.status != 'rejected') && <Typography sx={{ cursor: "pointer", fontSize: '13px', margin: { sm: '15px 0 15px 15px', xs: '15px 0 15px -3px' }, fontFamily: 'Montserrat', color: 'red' }} variant="h5">
                                 <Download sx={{ marginBottom: '-7px' }} />&nbsp;Download payment confirmation &nbsp;
-                                <Tooltip sx={{backgroundColor:"black"}} title={<div>You can scan your document or take a picture<br></br>
-                                of it on your smartphone</div>} placement="top">
-                                    <HelpOutline sx={{ marginBottom: '-7px', color: 'gray', cursor: "pointer" }} />
+                                <Tooltip sx={{ backgroundColor: "black" }} title={<div>You can scan your document or take a picture<br></br>
+                                    of it on your smartphone</div>} placement="top">
+                                    <HelpOutline sx={{ marginBottom: '-7px', color: 'gray' }} />
                                 </Tooltip>
                             </Typography>
                             }
-
 
                         </Box>
 
@@ -316,12 +309,6 @@ const Transactions = ({ user }) => {
                     >
                         Payment details
                     </Typography>
-
-
-
-
-
-
 
 
                     {/* try start */}
