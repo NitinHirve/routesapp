@@ -115,6 +115,15 @@ const StyledTextField = styled(TextField)({
     backgroundColor: "white",
 })
 
+
+const StyledAvatar = styled(Avatar)({
+    width: 20,
+    height: 20,
+    margin: 0,
+    padding: 0,
+    marginRight: '12px'
+})
+
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -205,10 +214,9 @@ const ExchangeRate = () => {
                                             setPaying({ code: 'AUD', flag: 'http://ec2-34-249-94-64.eu-west-1.compute.amazonaws.com/images/flags/au.svg' })
                                             return <>
                                                 <Stack direction="row">
-                                                    <Avatar
+                                                    <StyledAvatar
                                                         alt='AUD'
                                                         src='http://ec2-34-249-94-64.eu-west-1.compute.amazonaws.com/images/flags/au.svg'
-                                                        sx={{ width: 20, height: 20, margin: 0, padding: 0, marginRight: '12px' }}
                                                     />
                                                     <p style={{ fontSize: '19px' }}>AUD</p>
                                                 </Stack>
@@ -217,10 +225,9 @@ const ExchangeRate = () => {
 
                                         return <>
                                             <Stack direction="row">
-                                                <Avatar
+                                                <StyledAvatar
                                                     alt={selected.code}
                                                     src={selected.flag}
-                                                    sx={{ width: 20, height: 20, margin: 0, padding: 0, marginRight: '12px' }}
                                                 />
                                                 <p style={{ fontSize: '19px' }}>{selected.code}</p>
                                             </Stack>
@@ -241,10 +248,9 @@ const ExchangeRate = () => {
                                         >
                                             <>
                                                 <Stack direction="row">
-                                                    <Avatar
+                                                    <StyledAvatar
                                                         alt='AUD'
                                                         src={contry.flag}
-                                                        sx={{ width: 20, height: 20, margin: 0, padding: 0, marginRight: '12px' }}
                                                     />
                                                     <p style={{ fontSize: '19px' }}>{contry.code}</p>
                                                 </Stack>
@@ -299,10 +305,9 @@ const ExchangeRate = () => {
                                             setReceiving({ code: 'USD', flag: 'http://ec2-34-249-94-64.eu-west-1.compute.amazonaws.com/images/flags/us.svg' })
                                             return <>
                                                 <Stack direction="row">
-                                                    <Avatar
+                                                    <StyledAvatar
                                                         alt='USD'
                                                         src='http://ec2-34-249-94-64.eu-west-1.compute.amazonaws.com/images/flags/us.svg'
-                                                        sx={{ width: 20, height: 20, margin: 0, padding: 0, marginRight: '12px' }}
                                                     />
                                                     <p style={{ fontSize: '19px' }}>USD</p>
                                                 </Stack>
@@ -311,10 +316,9 @@ const ExchangeRate = () => {
 
                                         return <>
                                             <Stack direction="row">
-                                                <Avatar
+                                                <StyledAvatar
                                                     alt={selected.code}
                                                     src={selected.flag}
-                                                    sx={{ width: 20, height: 20, margin: 0, padding: 0, marginRight: '12px' }}
                                                 />
                                                 <p style={{ fontSize: '19px' }}>{selected.code}</p>
                                             </Stack>
@@ -335,10 +339,9 @@ const ExchangeRate = () => {
                                         >
                                             <>
                                                 <Stack direction="row">
-                                                    <Avatar
+                                                    <StyledAvatar
                                                         alt='AUD'
                                                         src={contry.flag}
-                                                        sx={{ width: 20, height: 20, margin: 0, padding: 0, marginRight: '12px' }}
                                                     />
                                                     <p style={{ fontSize: '19px' }}>{contry.code}</p>
                                                 </Stack>
