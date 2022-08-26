@@ -30,18 +30,56 @@ const StyledTypographyUserSub = styled(Typography)({
     color: '#626262'
 })
 
-const names = [
-    'Oliver Hansen',
-    'Van Henry',
-    'April Tucker',
-    'Ralph Hubbard',
-    'Omar Alexander',
-    'Carlos Abbott',
-    'Miriam Wagner',
-    'Bradley Wilkerson',
-    'Virginia Andrews',
-    'Kelly Snyder',
-];
+
+
+const contries = [
+    {
+        code: 'AUD',
+        flag: 'http://ec2-34-249-94-64.eu-west-1.compute.amazonaws.com/images/flags/au.svg'
+    },
+    {
+        code: 'GBP',
+        flag: 'http://ec2-34-249-94-64.eu-west-1.compute.amazonaws.com/images/flags/gb.svg'
+    },
+    {
+        code: 'USD',
+        flag: 'http://ec2-34-249-94-64.eu-west-1.compute.amazonaws.com/images/flags/us.svg'
+    },
+    {
+        code: 'CAD',
+        flag: 'http://ec2-34-249-94-64.eu-west-1.compute.amazonaws.com/images/flags/ca.svg'
+    },
+    {
+        code: 'AED',
+        flag: 'http://ec2-34-249-94-64.eu-west-1.compute.amazonaws.com/images/flags/ae.svg'
+    },
+    {
+        code: 'HKD',
+        flag: 'http://ec2-34-249-94-64.eu-west-1.compute.amazonaws.com/images/flags/hk.svg'
+    },
+    {
+        code: 'EUR',
+        flag: 'http://ec2-34-249-94-64.eu-west-1.compute.amazonaws.com/images/flags/eu.svg'
+    },
+]
+
+
+const checkRateStyle = {
+    marginLeft: '25px',
+    height: '25px',
+    '&:hover':
+    {
+        backgroundColor: '#f96c39',
+        boxShadow: 'none'
+    },
+    borderRadius: '5px',
+    backgroundColor: '#f64200',
+    color: '#fff'
+}
+
+
+
+
 
 const buttonStyle = {
     padding: '15px',
@@ -64,6 +102,15 @@ const buttonStyle = {
 }
 
 
+const StyledStack = styled(Stack)({
+    border: '1px solid  #e9e9e9',
+    borderRadius: '4px',
+    height: '52px',
+    padding: '7.5px 10px 7.5px 10px',
+    marginTop: '10px'
+})
+
+
 const StyledTextField = styled(TextField)({
     backgroundColor: "white",
 })
@@ -84,17 +131,27 @@ const MenuProps = {
 const ExchangeRate = () => {
 
 
-    const [personName, setPersonName] = React.useState([]);
+    const [paying, setPaying] = React.useState([]);
+    const [receiving, setReceiving] = React.useState([]);
 
-    const handleChange = (event) => {
+    const handleChangePaying = (event) => {
         const {
             target: { value },
         } = event;
-        setPersonName(
-            // On autofill we get a stringified value.
+        setPaying(
             typeof value === 'string' ? value.split(',') : value,
         );
     };
+
+    const handleChangeReceiving = (event) => {
+        const {
+            target: { value },
+        } = event;
+        setReceiving(
+            typeof value === 'string' ? value.split(',') : value,
+        );
+    };
+
 
 
     return (
@@ -104,11 +161,11 @@ const ExchangeRate = () => {
                     <StyledTypographyHead variant="h6">Check the exchange rate</StyledTypographyHead>
                 </Box>
 
-                <Stack
+                <StyledStack
                     direction="row"
                     divider={<Divider sx={{ height: '40px', marginTop: '5px' }} orientation="vertical" flexItem />}
                     spacing={2}
-                    sx={{ border: '1px solid  #e9e9e9', borderRadius: '4px', height: '52px', padding: '7.5px 10px 7.5px 10px', marginTop: '10px' }}
+
                 >
                     <Box sx={{ width: { sm: '55%', xs: '50%' } }}>
 
@@ -124,32 +181,89 @@ const ExchangeRate = () => {
                         />
 
                     </Box>
-                    <Box sx={{ width: { sm: '45%', xs: '50%' }, position: 'relative' }} >
-                        <Box sx={{ display: 'flex', height: '100%', alignItems: 'center', justifyContent: 'space-between' }}>
-                            <Stack direction="row">
-                                <Avatar
-                                    alt='AUD'
-                                    src='http://ec2-34-249-94-64.eu-west-1.compute.amazonaws.com/images/flags/au.svg'
-                                    sx={{ width: 20, height: 20, margin: 0, padding: 0, marginRight: '12px' }}
-                                />
-                                <p style={{ fontSize: '19px' }}>AUD</p>
+                    <Box sx={{ width: { sm: '45%', xs: '50%' } }} >
 
-                            </Stack>
-                            <Box>
-                                <KeyboardArrowDown sx={{ color: '#e8541e' }} />
-                            </Box>
 
+                        <Box sx={{ height: '100%' }}>
+                            <FormControl sx={{
+                                width: '100%',
+                                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                                    border: 'none',
+                                },
+                                fontStyle: 'none',
+                                paddingLeft: 0
+                            }}>
+                                <Select
+                                    displayEmpty
+                                    forcePopupIcon={false}
+                                    value={paying}
+                                    onChange={handleChangePaying}
+                                    IconComponent={KeyboardArrowDown}
+
+                                    renderValue={(selected) => {
+                                        if (selected.length === 0) {
+                                            setPaying({ code: 'AUD', flag: 'http://ec2-34-249-94-64.eu-west-1.compute.amazonaws.com/images/flags/au.svg' })
+                                            return <>
+                                                <Stack direction="row">
+                                                    <Avatar
+                                                        alt='AUD'
+                                                        src='http://ec2-34-249-94-64.eu-west-1.compute.amazonaws.com/images/flags/au.svg'
+                                                        sx={{ width: 20, height: 20, margin: 0, padding: 0, marginRight: '12px' }}
+                                                    />
+                                                    <p style={{ fontSize: '19px' }}>AUD</p>
+                                                </Stack>
+                                            </>;
+                                        }
+
+                                        return <>
+                                            <Stack direction="row">
+                                                <Avatar
+                                                    alt={selected.code}
+                                                    src={selected.flag}
+                                                    sx={{ width: 20, height: 20, margin: 0, padding: 0, marginRight: '12px' }}
+                                                />
+                                                <p style={{ fontSize: '19px' }}>{selected.code}</p>
+                                            </Stack>
+                                        </>;;
+                                    }}
+                                    MenuProps={MenuProps}
+                                    inputProps={{ 'aria-label': 'Without label' }}
+                                    sx={{
+                                        '& .MuiOutlinedInput-notchedOutline': {
+                                            border: 'none',
+                                        },
+                                    }}
+                                >
+                                    {contries.map((contry, i) => (
+                                        <MenuItem
+                                            key={i}
+                                            value={contry}
+                                        >
+                                            <>
+                                                <Stack direction="row">
+                                                    <Avatar
+                                                        alt='AUD'
+                                                        src={contry.flag}
+                                                        sx={{ width: 20, height: 20, margin: 0, padding: 0, marginRight: '12px' }}
+                                                    />
+                                                    <p style={{ fontSize: '19px' }}>{contry.code}</p>
+                                                </Stack>
+                                            </>
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
                         </Box>
-                        
+
                     </Box>
-                </Stack>
+                </StyledStack>
 
 
-                <Stack
+                <StyledStack
                     direction="row"
                     divider={<Divider sx={{ height: '40px', marginTop: '5px' }} orientation="vertical" flexItem />}
                     spacing={2}
-                    sx={{ border: '1px solid  #e9e9e9', borderRadius: '4px', height: '52px', padding: '7.5px 10px 7.5px 10px', marginTop: '10px' }}
+
                 >
                     <Box sx={{ width: { sm: '55%', xs: '50%' } }}>
                         <StyledTextField
@@ -163,31 +277,92 @@ const ExchangeRate = () => {
                             sx={{ width: '100%', caretColor: '#f64200' }}
                         />
                     </Box>
-                    <Box sx={{ width: { sm: '45%', xs: '50%' }, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }} >
-                        <Stack direction="row">
-                            <Avatar
-                                alt='USD'
-                                src='http://ec2-34-249-94-64.eu-west-1.compute.amazonaws.com/images/flags/us.svg'
-                                sx={{ width: 20, height: 20, margin: 0, padding: 0, marginRight: '12px' }}
-                            />
-                            <p style={{ fontSize: '19px' }}>USD</p>
-                        </Stack>
-                        <Box>
-                            <KeyboardArrowDown sx={{ color: '#e8541e' }} />
+                    <Box sx={{ width: { sm: '45%', xs: '50%' } }} >
+                        <Box sx={{ height: '100%' }}>
+                            <FormControl sx={{
+                                width: '100%',
+                                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                                    border: 'none',
+                                },
+                                fontStyle: 'none',
+                                paddingLeft: 0
+                            }}>
+                                <Select
+                                    displayEmpty
+                                    forcePopupIcon={false}
+                                    value={receiving}
+                                    onChange={handleChangeReceiving}
+                                    IconComponent={KeyboardArrowDown}
+
+                                    renderValue={(selected) => {
+                                        if (selected.length === 0) {
+                                            setReceiving({ code: 'USD', flag: 'http://ec2-34-249-94-64.eu-west-1.compute.amazonaws.com/images/flags/us.svg' })
+                                            return <>
+                                                <Stack direction="row">
+                                                    <Avatar
+                                                        alt='USD'
+                                                        src='http://ec2-34-249-94-64.eu-west-1.compute.amazonaws.com/images/flags/us.svg'
+                                                        sx={{ width: 20, height: 20, margin: 0, padding: 0, marginRight: '12px' }}
+                                                    />
+                                                    <p style={{ fontSize: '19px' }}>USD</p>
+                                                </Stack>
+                                            </>;
+                                        }
+
+                                        return <>
+                                            <Stack direction="row">
+                                                <Avatar
+                                                    alt={selected.code}
+                                                    src={selected.flag}
+                                                    sx={{ width: 20, height: 20, margin: 0, padding: 0, marginRight: '12px' }}
+                                                />
+                                                <p style={{ fontSize: '19px' }}>{selected.code}</p>
+                                            </Stack>
+                                        </>;;
+                                    }}
+                                    MenuProps={MenuProps}
+                                    inputProps={{ 'aria-label': 'Without label' }}
+                                    sx={{
+                                        '& .MuiOutlinedInput-notchedOutline': {
+                                            border: 'none',
+                                        },
+                                    }}
+                                >
+                                    {contries.map((contry, i) => (
+                                        <MenuItem
+                                            key={i}
+                                            value={contry}
+                                        >
+                                            <>
+                                                <Stack direction="row">
+                                                    <Avatar
+                                                        alt='AUD'
+                                                        src={contry.flag}
+                                                        sx={{ width: 20, height: 20, margin: 0, padding: 0, marginRight: '12px' }}
+                                                    />
+                                                    <p style={{ fontSize: '19px' }}>{contry.code}</p>
+                                                </Stack>
+                                            </>
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
                         </Box>
 
                     </Box>
-                </Stack>
-                <p className='wallet_subhead' style={{ margin: '10px 0 10px 0', fontSize: '16px' }}>
-                    Exchange rate is &nbsp;&nbsp;<span style={{ color: '#f64200' }}>1.1749</span><Chip
-                        sx={{ marginLeft: '25px', height: '25px', '&:hover': { backgroundColor: '#f96c39', boxShadow: 'none' }, borderRadius: '5px', backgroundColor: '#f64200', color: '#fff' }} label="Check rate" onClick={() => { }} /></p>
+                </StyledStack>
+
+                {
+                    (paying.code != receiving.code) && <p className='wallet_subhead' style={{ margin: '10px 0 10px 0', fontSize: '16px' }}>
+                        Exchange rate is &nbsp;&nbsp;<span style={{ color: '#f64200' }}>1.1749</span><Chip
+                            sx={checkRateStyle} label="Check rate" onClick={() => { }} />
+                    </p>
+                }
 
                 <Button variant="outlined"
                     sx={buttonStyle}>
                     Transfer now
                 </Button>
-
-
 
             </StyledBox>
         </>
