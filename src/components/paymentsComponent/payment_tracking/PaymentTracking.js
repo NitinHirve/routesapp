@@ -74,6 +74,8 @@ const PaymentTracking = () => {
           }
 
         </Box>
+        <Typography className="yourWallets_footer" sx={{marginBottom:'25px!important'}}  align="right" >Show more</Typography>
+        
       </StyledBox>
     </>
 

@@ -373,3 +373,5 @@ const ExchangeRate = () => {
 }
 
 export default ExchangeRate
+
+

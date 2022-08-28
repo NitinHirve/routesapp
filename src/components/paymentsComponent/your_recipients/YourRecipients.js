@@ -114,6 +114,7 @@ const YourRecipients = () => {
                         }
                     </MediaQuery>
                 </Box>
+                <Typography className="yourWallets_footer" sx={{color:'#f64200'}} align="right" >Add recipient</Typography>
             </StyledBox>
         </>
     )

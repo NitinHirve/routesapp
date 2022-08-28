@@ -34,20 +34,20 @@ const wallets = [
     {
         flag: 'http://ec2-34-249-94-64.eu-west-1.compute.amazonaws.com/images/flags/eu.svg',
         balance: '12,312.43',
-        currency:'EUR',
+        currency: 'EUR',
         payment_due: '10,300.03 EUR',
-       
+
     },
     {
         flag: 'http://ec2-34-249-94-64.eu-west-1.compute.amazonaws.com/images/flags/au.svg',
         balance: '42,300',
-        currency:'AUD',
+        currency: 'AUD',
         payment_due: null
     },
     {
         flag: 'http://ec2-34-249-94-64.eu-west-1.compute.amazonaws.com/images/flags/gb.svg',
         balance: '0.00',
-        currency:'GBP',
+        currency: 'GBP',
         payment_due: null
     },
 ]
@@ -83,8 +83,7 @@ const YourWallets = () => {
                         ))
                     }
                 </Box>
-                <Typography className="yourWallets_footer"  align="right" >View activity</Typography>
-
+                <Typography className="yourWallets_footer" align="right" >View activity</Typography>
 
             </StyledBox>
         </>
